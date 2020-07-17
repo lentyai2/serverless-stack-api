@@ -1,12 +1,9 @@
 import * as uuid from "uuid";
 import handler from "./libs/handler-lib";
 import dynamoDb from "./libs/dynamodb-lib";
-import AWS from "aws-sdk";
-
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 export const main = handler(async (event, context) => {
-  const data = JSON.parse(even.body);
+  const data = JSON.parse(event.body);
   const params = {
     TableName: process.env.tableName,
     // 'Item' contains the attributes of the item to be created
@@ -27,6 +24,6 @@ export const main = handler(async (event, context) => {
   };
 
   await dynamoDb.put(params);
+
   return params.Item;
 });
-
